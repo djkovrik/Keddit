@@ -7,15 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sedsoftware.keddit.R
+import com.sedsoftware.keddit.commons.InfiniteScrollListener
+import com.sedsoftware.keddit.commons.RedditNews
 import com.sedsoftware.keddit.commons.RxBaseFragment
 import com.sedsoftware.keddit.commons.extensions.inflate
 import com.sedsoftware.keddit.features.news.adapter.NewsAdapter
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.news_fragment.*
 
 class NewsFragment : RxBaseFragment() {
 
+  private var redditNews: RedditNews? = null
   private val newsManager by lazy { NewsManager() }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -27,25 +29,32 @@ class NewsFragment : RxBaseFragment() {
     super.onActivityCreated(savedInstanceState)
 
     news_list.setHasFixedSize(true)
-    news_list.layoutManager = LinearLayoutManager(context)
-    initAdapter()
+    val linearLayout = LinearLayoutManager(context)
+    news_list.layoutManager = linearLayout
+    news_list.clearOnScrollListeners()
+    news_list.addOnScrollListener(InfiniteScrollListener({ requestNews() }, linearLayout))
 
+    initAdapter()
     requestNews()
   }
 
   private fun requestNews() {
-    val dispose = newsManager.getNews()
+    /**
+     * first time will send empty string for after parameter.
+     * Next time we will have redditNews set with the next page to
+     * navigate with the after param.
+     */
+    val dispose = newsManager.getNews(redditNews?.after ?: "")
         .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(
+        .subscribe (
             { retrievedNews ->
-              (news_list.adapter as NewsAdapter).addNews(retrievedNews)
+              redditNews = retrievedNews
+              (news_list.adapter as NewsAdapter).addNews(retrievedNews.news)
             },
-            { error ->
-              Snackbar.make(news_list, error.message ?: "", Snackbar.LENGTH_LONG).show()
+            { e ->
+              Snackbar.make(news_list, e.message ?: "", Snackbar.LENGTH_LONG).show()
             }
         )
-
     disposableList.add(dispose)
   }
 

@@ -6,3 +6,4 @@ Sample app based on Kotlin related article series:
 * [Part 4: RecyclerView — Delegate Adapters & Data Classes](https://android.jlelse.eu/keddit-part-4-recyclerview-delegate-adapters-data-classes-with-kotlin-9248f44327f7)
 * [Part 5: Kotlin, RxJava & RxAndroid](https://android.jlelse.eu/keddit-part-5-kotlin-rxjava-rxandroid-105f95bfcd22)
 * [Part 6: Retrofit and Kotlin](https://android.jlelse.eu/keddit-part-6-api-retrofit-kotlin-d309074af0)
+* [Part 7: Infinite Scroll: Higher-Order functions & Lambdas](https://android.jlelse.eu/keddit-part-7-infinite-scroll-higher-order-functions-lambdas-3a11fbd5090e)
