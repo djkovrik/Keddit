@@ -1,11 +1,12 @@
 package com.sedsoftware.keddit.features.news
 
-import com.sedsoftware.keddit.api.RestApi
+import com.sedsoftware.keddit.api.NewsAPI
+import com.sedsoftware.keddit.api.NewsRestAPI
 import com.sedsoftware.keddit.commons.RedditNews
 import com.sedsoftware.keddit.commons.RedditNewsItem
 import io.reactivex.Observable
 
-class NewsManager(private val api: RestApi = RestApi()) {
+class NewsManager(private val api: NewsAPI = NewsRestAPI()) {
 
   fun getNews(after: String, limit: String = "10"): Observable<RedditNews> {
     return Observable.create {

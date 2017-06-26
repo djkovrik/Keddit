@@ -8,3 +8,4 @@ Sample app based on Kotlin related article series:
 * [Part 6: Retrofit and Kotlin](https://android.jlelse.eu/keddit-part-6-api-retrofit-kotlin-d309074af0)
 * [Part 7: Infinite Scroll: Higher-Order functions & Lambdas](https://android.jlelse.eu/keddit-part-7-infinite-scroll-higher-order-functions-lambdas-3a11fbd5090e)
 * [Part 8: Orientation Change with Kotlin (Parcelable & Data Classes](https://android.jlelse.eu/keddit-part-8-orientation-change-with-kotlin-parcelable-data-classes-f28136e8a6a8)
+* [Part 9: Unit tests (Mockito, RxJava)](https://android.jlelse.eu/keddit-part-9-unit-test-with-kotlin-mockito-spek-76709812e3b6)
